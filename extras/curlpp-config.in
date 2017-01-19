@@ -56,12 +56,12 @@ while test $# -gt 0; do
         ;;
 
     --version)
-	echo libcurlpp @VERSION@
+	echo libcurlpp @CURLPP_VERSION@
 	exit 0
 	;;
 
     --vernum)
-	echo @VERSIONNUM@
+	echo @CURLPP_VERSION_NUM@
 	exit 0
 	;;
 
