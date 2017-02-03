@@ -161,7 +161,7 @@ message(STATUS
   "Defining the shared library for ${PROJECT_NAME} including "
   "all source and header files not in examples."
 )
-add_library(${PROJECT_NAME} SHARED ${HeaderFileList} ${SourceFileList})
+add_library(${PROJECT_NAME} STATIC ${HeaderFileList} ${SourceFileList})
 target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES})
 
 if(CURLPP_EXAMPLES)
