@@ -1,5 +1,18 @@
 project(curlpp) 
-cmake_minimum_required(VERSION 3.0)
+
+if(WIN32)
+    # cmake 3.4 is required for CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS
+    cmake_minimum_required(VERSION 3.4)
+else()
+    cmake_minimum_required(VERSION 3.0)
+endif()
+
+set(CMAKE_CXX_STANDARD 11) # C++11...
+set(CMAKE_CXX_STANDARD_REQUIRED ON) #...is required...
+set(CMAKE_CXX_EXTENSIONS OFF) #...without compiler extensions like gnu++11
+
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 
 #########################################################################################
 # Root folders
@@ -34,28 +47,14 @@ endfunction(DisplayList)
 # File Lists
 set(HeaderFileList
   ${IncludeFolder}utilspp/EmptyType.hpp
-  ${IncludeFolder}utilspp/singleton/LifetimeWithLongevity.hpp
-  ${IncludeFolder}utilspp/singleton/SingletonHolder.hpp
-  ${IncludeFolder}utilspp/singleton/LifetimeLibrary.hpp
-  ${IncludeFolder}utilspp/singleton/CreationStatic.hpp
-  ${IncludeFolder}utilspp/singleton/CreationUsingNew.hpp
-  ${IncludeFolder}utilspp/singleton/LifetimeDefault.hpp
-  ${IncludeFolder}utilspp/singleton/PrivateMembers.hpp
   ${IncludeFolder}utilspp/NullType.hpp
   ${IncludeFolder}utilspp/ThreadingSingle.hpp
-  ${IncludeFolder}utilspp/Singleton.hpp
   ${IncludeFolder}utilspp/TypeTrait.hpp
   ${IncludeFolder}utilspp/clone_ptr.hpp
-  ${IncludeFolder}utilspp/functor/MemFunHandler.hpp
-  ${IncludeFolder}utilspp/functor/FunctorHandler.hpp
-  ${IncludeFolder}utilspp/functor/Binder.hpp
-  ${IncludeFolder}utilspp/functor/FunctorImpl.hpp
-  ${IncludeFolder}utilspp/functor/Functor.hpp
   ${IncludeFolder}utilspp/TypeList.hpp
   ${IncludeFolder}utilspp/NonCopyable.hpp
   ${IncludeFolder}utilspp/SmartPtr.hpp
   ${IncludeFolder}utilspp/ThreadingFactoryMutex.hpp
-  ${IncludeFolder}utilspp/Functors.hpp
   ${IncludeFolder}curlpp/Exception.hpp
   ${IncludeFolder}curlpp/Option.hpp
   ${IncludeFolder}curlpp/Info.hpp
@@ -67,8 +66,6 @@ set(HeaderFileList
   ${IncludeFolder}curlpp/Options.hpp
   ${IncludeFolder}curlpp/Multi.hpp
   ${IncludeFolder}curlpp/internal/OptionContainerType.hpp
-  ${IncludeFolder}curlpp/internal/global.h
-  ${IncludeFolder}curlpp/internal/buildconfig.h
   ${IncludeFolder}curlpp/internal/OptionContainer.hpp
   ${IncludeFolder}curlpp/internal/SList.hpp
   ${IncludeFolder}curlpp/internal/CurlHandle.hpp
@@ -80,8 +77,6 @@ set(HeaderFileList
 DisplayList("Using Header Files:" "${HeaderFileList}")
 
 set(SourceFileList
-  ${SrcFolder}utilspp/PrivateMembers.cpp
-  ${SrcFolder}utilspp/LifetimeLibrary.cpp
   ${SrcFolder}curlpp/Form.cpp
   ${SrcFolder}curlpp/Exception.cpp
   ${SrcFolder}curlpp/Options.cpp
